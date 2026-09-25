@@ -1,0 +1,57 @@
+.main {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+.content {
+  max-width: 23.4375rem;
+  height: 100%;
+  background-color: #ffffff;
+  position: relative;
+  border: 0.0625rem solid black;
+}
+
+.topBar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3.125rem;
+  background-color: #fafafa;
+  box-shadow: 0rem 0.020625rem 0rem 0rem #a6a6aa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1.25rem;
+  box-sizing: border-box;
+}
+
+.logo {
+  width: 1.5625rem;
+  height: 1.625rem;
+  flex-shrink: 0;
+}
+
+.headerText {
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.004375rem;
+  color: #262626;
+  margin-left: 1rem;
+  line-height: 1.125rem;
+}
+
+.blueprint {
+  color: #0078e8;
+}
+
+.contentScroll {
+  margin-top: 3.125rem;
+}
