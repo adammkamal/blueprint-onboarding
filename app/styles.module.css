@@ -1,51 +1,75 @@
+
 .main {
+  min-height: 100vh;
   width: 100%;
-  height: 100%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  background: #fff;
   margin: 0;
-  padding: 0;
 }
 
 .content {
-  max-width: 23.4375rem;
-  height: 100%;
-  background-color: #ffffff;
-  position: relative;
-  border: 0.0625rem solid black;
+  width: 100%;
+  max-width: 375px;
+  height: 812px;
+  max-height: 100dvh;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.statusBar {
+  height: 40px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 23px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #151515;
+}
+
+.statusIcons {
+  font-size: 13px;
+  letter-spacing: 2px;
 }
 
 .topBar {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 3.125rem;
-  background-color: #fafafa;
-  box-shadow: 0rem 0.020625rem 0rem 0rem #a6a6aa;
+  height: 48px;
+  flex-shrink: 0;
+  background: #fafafa;
+  border-bottom: 1px solid #dedede;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 1.25rem;
   box-sizing: border-box;
+  gap: 10px;
 }
 
 .logo {
-  width: 1.5625rem;
-  height: 1.625rem;
+  width: 25px;
+  height: 27px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
+}
+
+.logo svg {
+  width: 100%;
+  height: 100%;
 }
 
 .headerText {
   font-family: "Poppins", sans-serif;
-  font-size: 1rem;
+  font-size: 16px;
   font-weight: 600;
-  letter-spacing: -0.004375rem;
+  letter-spacing: -0.2px;
   color: #262626;
-  margin-left: 1rem;
-  line-height: 1.125rem;
+  white-space: nowrap;
 }
 
 .blueprint {
@@ -53,5 +77,142 @@
 }
 
 .contentScroll {
-  margin-top: 3.125rem;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.contentScroll::-webkit-scrollbar {
+  display: none;
+}
+
+.post {
+  border-bottom: 1px solid #e5e5e5;
+  padding: 16px 15px 6px;
+}
+
+.postHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 11px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  background: #d9d9d9;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.userDetails {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
+
+.username {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  color: #262626;
+  margin: 0;
+  line-height: 20px;
+}
+
+.username span {
+  font-weight: 600;
+}
+
+.location {
+  font-size: 11px;
+  color: #969696;
+  margin: 0;
+  line-height: 17px;
+}
+
+.postBody {
+  width: 100%;
+}
+
+.postImage {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1.5 / 1;
+  object-fit: cover;
+  border-radius: 9px;
+  margin-bottom: 20px;
+}
+
+.description {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.38;
+  letter-spacing: -0.15px;
+  color: #262626;
+  margin: 0 0 20px;
+  overflow-wrap: anywhere;
+}
+
+.engagement {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 10px;
+  color: #262626;
+  margin-bottom: 8px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.leftActions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.actions button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: #111;
+  padding: 0;
+  cursor: pointer;
+}
+
+.date {
+  margin: 0;
+  font-size: 10px;
+  color: #b7b7b7;
+}
+
+.post + .post {
+  padding-top: 16px;
+}
+
+.post + .post .description {
+  margin-top: 17px;
+  margin-bottom: 52px;
+}
+
+@media (max-width: 375px) {
+  .content {
+    max-width: 100%;
+  }
+}
+
+@media (max-height: 812px) {
+  .content {
+    height: 100dvh;
+  }
 }
