@@ -1,4 +1,3 @@
-
 "use client";
 
 import { FiHeart as HeartIcon } from "react-icons/fi";
@@ -21,8 +20,7 @@ export default function Home() {
             <BlueprintLogo />
           </div>
           <span className={styles.headerText}>
-            <span className={styles.blueprint}>blueprint</span>{" "}
-            volunteers
+            <span className={styles.blueprint}>blueprint</span> volunteers
           </span>
         </header>
 
@@ -34,9 +32,7 @@ export default function Home() {
                 <p className={styles.username}>
                   neha32 <span>at Mission Bit</span>
                 </p>
-                <p className={styles.location}>
-                  San Francisco, CA
-                </p>
+                <p className={styles.location}>San Francisco, CA</p>
               </div>
             </div>
 
@@ -48,12 +44,11 @@ export default function Home() {
               />
 
               <p className={styles.description}>
-                This past weekend, I taught at Mission Bit. I was
-                working with a group of 10 high school students who
-                were building their first web pages. They were all
-                really eager to learn, and I&apos;m glad I signed up.
-                Highly recommend to any other software engineers
-                interested in volunteering! Sign up here:
+                This past weekend, I taught at Mission Bit. I was working with a
+                group of 10 high school students who were building their first
+                web pages. They were all really eager to learn, and I&apos;m
+                glad I signed up. Highly recommend to any other software
+                engineers interested in volunteering! Sign up here:
                 https://missionbit.org/get-involved/volunteer-with-us/
               </p>
 
@@ -93,8 +88,7 @@ export default function Home() {
 
             <div className={styles.postBody}>
               <p className={styles.description}>
-                I recently volunteered at my local Boys and Girls
-                Club!
+                I recently volunteered at my local Boys and Girls Club!
               </p>
             </div>
           </article>
