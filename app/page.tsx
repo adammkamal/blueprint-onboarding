@@ -1,58 +1,123 @@
 "use client";
 
-import { FiHeart as HeartIcon } from "react-icons/fi";
-import { GoPaperAirplane as ShareIcon } from "react-icons/go";
-import { LuCircle as ProfileIcon } from "react-icons/lu";
-import { TbMessageCircle } from "react-icons/tb";
+import type {
+  DatabaseComment,
+  DatabaseLocation,
+  DatabasePost,
+} from "@/actions/supabase/queries/query";
+import { useEffect, useMemo, useState } from "react";
+import { FiArrowLeft } from "react-icons/fi";
+import {
+  fetchComments,
+  fetchLocations,
+  fetchPosts,
+} from "@/actions/supabase/queries/query";
 import { BlueprintLogo } from "@/assets/logos/BlueprintLogo";
-import "@/styles/global.css";
+import Post from "@/components/Post";
 import styles from "./styles.module.css";
 
+type FeedData = {
+  posts: DatabasePost[];
+  comments: DatabaseComment[];
+  locations: DatabaseLocation[];
+};
+
 export default function Home() {
+  const [feed, setFeed] = useState<FeedData | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [selectedPostId, setSelectedPostId] = useState<number | null>(null);
+
+  useEffect(() => {
+    let active = true;
+    async function loadFeed() {
+      try {
+        const [posts, comments, locations] = await Promise.all([
+          fetchPosts(),
+          fetchComments(),
+          fetchLocations(),
+        ]);
+        if (active) setFeed({ posts, comments, locations });
+      } catch (cause) {
+        if (active) {
+          setError(
+            cause instanceof Error ? cause.message : "Unable to load feed",
+          );
+        }
+      }
+    }
+    void loadFeed();
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  const locationsById = useMemo(
+    () =>
+      new Map(feed?.locations.map(location => [location.id, location]) ?? []),
+    [feed],
+  );
+  const visiblePosts =
+    feed?.posts.filter(
+      post => selectedPostId === null || post.id === selectedPostId,
+    ) ?? [];
+
   return (
     <main className={styles.main}>
       <div className={styles.content}>
         <div className={styles.topBar}>
-          <div className={styles.logo}>
-            <BlueprintLogo />
+          {selectedPostId !== null && (
+            <button
+              type="button"
+              className={styles.backButton}
+              aria-label="Back to post feed"
+              onClick={() => setSelectedPostId(null)}
+            >
+              <FiArrowLeft size={24} />
+            </button>
+          )}
+          <div className={styles.brand}>
+            <div className={styles.logo}>
+              <BlueprintLogo />
+            </div>
+            <span className={styles.headerText}>
+              <span className={styles.blueprint}>blueprint</span> volunteers
+            </span>
           </div>
-          <span className={styles.headerText}>
-            <span className={styles.blueprint}>blueprint</span> volunteers
-          </span>
         </div>
-
         <div className={styles.contentScroll}>
-          <ProfileIcon size={24} />
-          <p>neha32 at Mission Bit</p>
-          <p>San Francisco, CA</p>
-
-          <p>
-            Image Link:
-            https://cdn.britannica.com/51/178051-050-3B786A55/San-Francisco.jpg
-          </p>
-
-          <p>
-            This past weekend, I taught at Mission Bit. I was working with a
-            group of high school students who were building their first web
-            pages. I really enjoyed being able to help guide 10 students on
-            learning CS fundamentals through a project! They were all really
-            eager to learn, and I&#39;m glad I signed up. Highly recommend to
-            any other software engineers interested in volunteering! Sign-up
-            here: https://missionbit.org/get-involved/volunteer-with-us/
-          </p>
-
-          <p>3 Likes</p>
-          <p>View 2 Comments</p>
-          <HeartIcon size={24} />
-          <TbMessageCircle size={24} />
-          <ShareIcon size={24} />
-
-          <p>February 1</p>
-
-          <ProfileIcon size={24} />
-          <p>aiden_ugh at Boys and Girls Club</p>
-          <p>Oakland, CA</p>
-          <p>I recently volunteered at my local Boys and Girls Club!</p>
+          {error ? (
+            <p role="alert" className={styles.message}>
+              {error}
+            </p>
+          ) : feed === null ? (
+            <p role="status" className={styles.message}>
+              Loading posts...
+            </p>
+          ) : feed.posts.length === 0 ? (
+            <p className={styles.message}>No posts yet.</p>
+          ) : (
+            visiblePosts.map(post => {
+              const location = locationsById.get(post.location_id);
+              return (
+                <Post
+                  key={post.id}
+                  username={post.user_name}
+                  npo={post.npo_name}
+                  city={location?.city_name ?? ""}
+                  state={location?.state_abbr ?? ""}
+                  text={post.post_text}
+                  image={post.image_link}
+                  likeCount={post.num_likes}
+                  createdAt={post.created_at}
+                  comments={feed.comments.filter(
+                    comment => comment.post_id === post.id,
+                  )}
+                  showComments={selectedPostId === post.id}
+                  onOpenComments={() => setSelectedPostId(post.id)}
+                />
+              );
+            })
+          )}
         </div>
       </div>
     </main>

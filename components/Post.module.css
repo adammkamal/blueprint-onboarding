@@ -1,0 +1,104 @@
+.post {
+  padding: 16px 14px 8px;
+  border-bottom: 1px solid #ebebeb;
+  color: #242424;
+  overflow-wrap: anywhere;
+}
+.header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0 0 10px;
+}
+.avatar {
+  width: 39px;
+  height: 39px;
+  border-radius: 50%;
+  background: #d9d9d9;
+  flex-shrink: 0;
+}
+.identity {
+  min-width: 0;
+}
+.byline {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+.byline strong {
+  font-weight: 700;
+}
+.location {
+  margin: 4px 0 0;
+  color: #989898;
+  font-size: 10px;
+}
+.photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 337 / 226;
+  object-fit: cover;
+  border-radius: 9px;
+}
+.body {
+  white-space: pre-wrap;
+  font-size: 12.5px;
+  line-height: 1.35;
+  margin: 20px 0 18px;
+}
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 9px;
+  margin-bottom: 10px;
+}
+.commentsToggle {
+  border: 0;
+  padding: 0;
+  color: inherit;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+}
+.commentsToggle:hover {
+  text-decoration: underline;
+}
+.commentsToggle:focus-visible,
+.iconButton:focus-visible {
+  outline: 2px solid #0078e8;
+  outline-offset: 3px;
+}
+.actions {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  margin: 0 0 8px;
+}
+.iconButton {
+  border: 0;
+  padding: 0;
+  background: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.actionSpacer {
+  flex: 1;
+}
+.date {
+  margin: 0;
+  color: #a0a0a0;
+  font-size: 9px;
+}
+.comments {
+  margin: 8px -14px 0;
+  border-top: 1px solid #eee;
+  padding: 3px 14px 12px;
+}
+.emptyComments {
+  font-size: 12px;
+  color: #989898;
+}
